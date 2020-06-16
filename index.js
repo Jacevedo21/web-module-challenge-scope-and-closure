@@ -58,10 +58,9 @@ Write a function called `inning` that generates a random number of points that a
 
 function inning(random){
   // return a random number from 0 to 2. 0, 1, 2.
-  return function(){
-  const newRoll = Math.floor(Math.random() * 3);
+  return Math.floor(Math.random() * 3);
 }
-
+console.log(inning());
 /* Task 3: finalScore()
 
 Write a higher order function called `finalScore` that accepts the callback function `inning` (from above) and a number of innings and and returns the final score of the game in the form of an object.
@@ -71,16 +70,23 @@ For example,
 finalScore(inning, 9) might return: 
 {
   "Home": 11,
-  "Away": 5,
+  "Away": 5, 
 }
 
 */ 
 
-function finalScore(cb, rounds){
-  let finalHomeScore
-  return {home: finalHomeScore, Away: finalSAwayScore}
-}
+// function finalScore(cb, rounds){
+//   // cb(inning())
+//   let finalHomeScore = 0;
+//   let finalAwayScore = 0;
+//   for(let i = 0; i < rounds; i++){
+//     finalHomeScore += cb()
+//     finalAwayScore = cb() + finalAwayScore
+//   }
+//   return {home: finalHomeScore, Away: finalAwayScore}
+// }
 
+// console.log(finalScore(inning, 9))
 /* Task 4: 
 
 Create a function called `scoreboard` that accepts the following parameters: 
@@ -102,6 +108,14 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(cb, rounds) {
+  let score = {Home: 0, Away: 0}
+  let home = [];
+  let away = [];
+  for(let i = 0; i < rounds; i++){
+    home.push(score.Home += cb())
+    away.push(score.Away += cb())
+  }
+  return [home, away]
 }
+console.log(scoreboard(inning, 9))
